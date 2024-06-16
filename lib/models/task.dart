@@ -19,7 +19,7 @@ class Task {
     return {
       'title': title,
       'description': description,
-      'dueDate': Timestamp.fromDate(dueDate),  // Convertendo DateTime para Timestamp
+      'dueDate': Timestamp.fromDate(dueDate),
       'category': category,
     };
   }
@@ -29,7 +29,7 @@ class Task {
       id: documentId,
       title: data['title'] ?? '',
       description: data['description'] ?? '',
-      dueDate: (data['dueDate'] as Timestamp).toDate(),  // Convertendo Timestamp para DateTime
+      dueDate: (data['dueDate'] as Timestamp).toDate(),
       category: data['category'] ?? '',
     );
   }
