@@ -29,7 +29,6 @@ class _TaskListScreenState extends State<TaskListScreen> {
             );
           }
 
-          // Organizar tarefas por categoria
           Map<String, List<Task>> tasksByCategory = {};
           snapshot.data!.forEach((task) {
             if (!tasksByCategory.containsKey(task.category)) {
@@ -87,7 +86,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                         ),
                         confirmDismiss: (direction) async {
                           if (direction == DismissDirection.endToStart) {
-                            // Confirmação para apagar
+                    
                             return await showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -108,7 +107,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                               },
                             );
                           } else if (direction == DismissDirection.startToEnd) {
-                            // Editar tarefa
+                      
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => TaskFormScreen(task: task)),
@@ -122,13 +121,13 @@ class _TaskListScreenState extends State<TaskListScreen> {
                             setState(() {
                               tasks.removeAt(index);
                             });
-                            // Apagar tarefa
+                          
                             TaskService().deleteTask(task.id);
                           }
                         },
                         child: Card(
                           margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                          color: _isDueSoon(task.dueDate) ? Colors.yellow.shade100 : Colors.white, // Destaque para tarefas próximas do vencimento
+                          color: _isDueSoon(task.dueDate) ? Colors.yellow.shade100 : Colors.white,
                           child: ListTile(
                             title: Text(
                               task.title,
@@ -179,10 +178,9 @@ class _TaskListScreenState extends State<TaskListScreen> {
     );
   }
 
-  // Método para verificar se a tarefa está próxima do vencimento
   bool _isDueSoon(DateTime dueDate) {
     final now = DateTime.now();
     final difference = dueDate.difference(now).inHours;
-    return difference <= 24 && difference >= 0; // Tarefas que vencem em 24 horas ou menos e que ainda não passaram
+    return difference <= 24 && difference >= 0;
   }
 }
